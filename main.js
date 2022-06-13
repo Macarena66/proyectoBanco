@@ -42,7 +42,7 @@ const cliente3={
     saldo:4000
 }
 
-const clientes = [gestor1, gestor2, {
+const gestores = [gestor1, gestor2, {
     id: 3,
     usuario: 'gestor3',
     password: 'gestor3',
