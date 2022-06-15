@@ -1,58 +1,85 @@
 /*
 Escribe un programa que almacene los objetos creados en el ejercio anterior del proyecto dentro de un array (un array por cada modelo de datos). A continuación, recorre cada uno de los arrays y muestra todas propiedades..
 */
-function mostrarGestor(gestor){
-    console.log(`id: ${gestor.id}`);
-    console.log(`usuario: ${gestor.usuario}`);
-    console.log(`password: ${gestor.password}`);
-    console.log(`correo: ${gestor.correo}`);
-    console.log('-----');
+// const gestores = generarGestores();
+// console.log(gestores);
 
-}
+// const gestoresJSON = JSON.stringify(gestores);
+// console.log(gestoresJSON);
+// console.log(gestoresJSON.length);
 
-function mostrarGestores(gestores){
-// gestores es un array
-// gestor es un objeto con las propiedades: id, usuario, password, correo
-console.log('---GESTORES---------');
-for (const gestor of gestores){
-    mostrarGestor(gestor);
-}
-}
+// const clientes = generarClientes();
+// const cliente1 = clientes[0];
+// const cliente1JSON = JSON.stringify(cliente1);
+// console.log(cliente1JSON);
+
+//realizar una peticion a http://localhost:8085/ok y mostrar la respuesta por pantalla
 
 
-function mostrarCliente(cliente){
-console.log(`id: ${cliente.id}`);
-console.log(`usuario: ${cliente.usuario}`);
-console.log(`password: ${cliente.password}`);
-console.log(`correo: ${cliente.correo}`);
-console.log(`saldo: ${cliente.saldo}`);
-console.log('-----');
-}
+// las propiedades del objeto opciones son: url, metodo, body, cabeceras
 
-function mostrarClientes(clientes){
-console.log('---CLIENTES---------');
-for (const cliente of clientes){
-    mostrarCliente(cliente);  
-}
 
-}
+//esto es una forma de hacerlo tambien
+// const opciones ={
+//     url:'http://localhost:8085/ok', 
+//     metodo:'GET'
+// };
 
-const gestores = generarGestores();
-console.log(gestores);
+// ajax(opciones, (data) =>{
+//     console.log(data);
+// })
 
-const gestoresJSON = JSON.stringify(gestores);
-console.log(gestoresJSON);
-console.log(gestoresJSON.length);
 
-const clientes = generarClientes();
-const cliente1 = clientes[0];
-const cliente1JSON = JSON.stringify(cliente1);
-console.log(cliente1JSON);
+const server = 'localhost:8085';
 
-// todos los gestores
-//console.log(gestores);
+const opciones = {
+    url: `http://${server}/ok`,
+    metodo: 'GET'
+};
 
-// primer gestor
-//console.log(gestores[0]);
-//console.log(gestor1);
-//console.log(cliente2);
+ajax(opciones, (data) => {
+    console.log(data);
+});
+
+const opcionesLogin = {
+    url: `http://${server}/login/gestor/`,
+    metodo: 'POST',
+    body: 'usuario=gestor1&password=gestor1',
+    cabeceras: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+};
+
+// realiza la petición de login del gestor
+ajax(opcionesLogin, (data) => {
+
+    // esta función se ejecuta cuando los datos han sido
+    // devueltos por el servicio
+
+    // convirtiendo el string en formato JSON a objeto de JavaScript
+    const respuesta = JSON.parse(data);
+
+    // guardamos el token
+    const token = respuesta.data.token;
+
+// realizamos la solicitud para obtener todos los gestores
+    const opcionesObtenerGestores = {
+        url: 'http://localhost:8085/gestores/',
+        metodo: 'GET',
+        cabeceras: {
+            Authorization: `Basic ${token}`
+        }
+    }
+
+    ajax(opcionesObtenerGestores, (data) => {
+
+         // data tiene toda la información de los gestores en formato string
+        console.log(data);
+
+         // convertir a objeto de JavaScript
+         const respuesta = JSON.parse(data);
+
+         const gestores = respuesta.data;
+         mostrarGestores(gestores);
+    });
+});
