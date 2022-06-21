@@ -1,4 +1,4 @@
-function ajax(opciones, callback) {
+export function ajax(opciones, callback) {
 
     // crea el objeto XMLHttpRequest
     const xhttp = new XMLHttpRequest();

@@ -7,7 +7,7 @@ function mostrarGestor(gestor){
 
 }
 
-function mostrarGestores(gestores){
+export function mostrarGestores(gestores){
 // gestores es un array
 // gestor es un objeto con las propiedades: id, usuario, password, correo
 console.log('---GESTORES---------');

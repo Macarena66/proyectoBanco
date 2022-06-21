@@ -1,6 +1,8 @@
+import { ajax } from './ajax.js';
 // esta variable se puede utilizar en cualquier parte del archivo
 const server = "localhost:8085";
-function obtenerGestores(){
+
+export function obtenerGestores(){
     //si ponemos prom sale esta linea sola
     return new Promise((resolve, reject) => {
         

@@ -25,7 +25,7 @@ function generarGestores() {
 
 function generarClientes() {
     const cliente1={
-        id:01,
+        id:1,
         id_gestor:2,
         usuario: 'Macarena',
         password:'macarena01',
@@ -34,7 +34,7 @@ function generarClientes() {
     };
     
     const cliente2={
-        id:02,
+        id:2,
         id_gestor:1,
         usuario:'Victor',
         password:'Victor02',
@@ -43,7 +43,7 @@ function generarClientes() {
     };
     
     const cliente3={
-        id:03,
+        id:3,
         id_gestor:1,
         usuario:'Marina',
         password:'Marina03',
@@ -54,7 +54,7 @@ function generarClientes() {
     const clientes = [cliente1, cliente2, cliente3];
         clientes.push(
             {
-                id: 04,
+                id: 4,
                 id_gestor: 1,
                 usuario: 'cliente4',
                 password: 'cliente4',
